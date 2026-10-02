@@ -72,51 +72,73 @@ public:
         if(head==NULL){
             return;
         }
+    Node* temp = head;
         head = head->next;
+        delete temp;
     }
 
     void delete_at_end()
     {
         Node* temp = head;
-        if(head == NULL)
+        if(temp == NULL)
         {
-            return;
+                return;
         }
-        if(head->next == NULL)
+        if(temp->next == NULL)
         {
-            head =NULL;
+            Node* del_node =temp;
+            temp =NULL;
+            head = temp;
+            delete del_node;
             return;
         }
         while(temp->next->next!= NULL)
         {
             temp = temp->next;
+
         }
+        Node* del_node = temp->next;
         temp->next= NULL;
+        delete del_node;
     }
 
     void delete_at_position(int post)
     {
-        int i = 1;
-        if(head == NULL)
+        
+        Node* temp = head;
+        if(temp == NULL)
         {
             return;
         }
-        if(head->next == NULL)
+        if(temp->next == NULL)
         {
-            head = NULL;
+            Node* del_node = temp;
+            temp= NULL;
+            head =temp;
+            delete del_node;
             return;
         }
         if(post == 1){
-            head = head->next;
+            Node* del_node = temp;
+            temp = temp->next;
+            head = temp;
+            delete del_node;
             return;
         }
-        Node* temp = head;
+        int i = 1;
+        int total = count_nodes();
+        if(total < post){
+            cout << "invalid position"<<endl;
+            return;
+        }
         while(post-1>i)
         {
             temp = temp->next;
             ++i;
         }
+        Node* del_node = temp->next;
         temp->next=temp->next->next;
+        delete del_node;
     }
 
     void display()
@@ -153,14 +175,14 @@ public:
     }
 
 
-    void count_nodes(){
+    int count_nodes(){
     Node* temp = head;
     int i = 0;
     while(temp!=NULL){
         temp = temp->next;
         i++;
         }
-    cout << "Total Nodes:"<<i<<endl;
+    return i;
     }
 
 
@@ -180,7 +202,7 @@ public:
 }
 };
 int main()
-{
+{/*
     LinkedList* LIST = new LinkedList();
 
 
@@ -194,5 +216,5 @@ int main()
     LIST->reverse();
 
     LIST->display();
-
+*/
 }
